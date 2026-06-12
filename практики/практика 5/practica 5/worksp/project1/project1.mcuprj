@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<MCUProject Schema="60" Class="CMCUProject" Path="" PathAbs="" ProjectType="0">
+<ProjectFolders/>
+<ProjectFiles>
+<FileItem>
+<MCUFile Class="CMCUFile" Path="&amp;ASCmain.asm" PathAbs="&amp;UNID:\high school\3 course\2 semestre\_uc40430044104320442\_uc8043f04400430043a04420438043a0438\_uc8043f04400430043a04420438043a0430 5\worksp\project1\main.asm" UseFileOptions="0" FileOptions=""/>
+</FileItem>
+</ProjectFiles>
+<BuildSettings>
+<MCUProjectBuildSettings Class="CMCUProjectBuildSettings" ToolGroupType="0" IntermediatePath="&amp;ASC.\" IntermediatePathAbs="&amp;UNID:\high school\3 course\2 semestre\_uc40430044104320442\_uc8043f04400430043a04420438043a0438\_uc8043f04400430043a04420438043a0430 5\worksp\project1\" OutputPath="&amp;ASC.\" OutputPathAbs="&amp;UNID:\high school\3 course\2 semestre\_uc40430044104320442\_uc8043f04400430043a04420438043a0438\_uc8043f04400430043a04420438043a0430 5\worksp\project1\" TargetFileType="6" SimPath="&amp;ASC.\" SimPathAbs="&amp;UNID:\high school\3 course\2 semestre\_uc40430044104320442\_uc8043f04400430043a04420438043a0438\_uc8043f04400430043a04420438043a0430 5\worksp\project1\" SimFile="&amp;ASCmain.hex" CodeLoadType="0">
+<Assembler>
+<MCUToolSettings Class="CMCUToolSettings" ToolType="0" IntermediatePath="&amp;ASC.\" IntermediatePathAbs="" OutputPath="&amp;ASC.\" OutputPathAbs="" TargetType="6" IncludeOptions="&amp;ASC$MOD51" PreFilenameOptions="" PostFilenameOptions="">
+<MCULibraries/>
+</MCUToolSettings>
+</Assembler>
+</MCUProjectBuildSettings>
+</BuildSettings>
+</MCUProject>

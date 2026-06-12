@@ -1,0 +1,259 @@
+P2 EQU 0A0H
+
+ORG 0000H
+    LJMP START
+
+ORG 0030H
+
+START:
+    MOV P2,#00H
+
+MAIN:
+
+; ==================================================
+; ?????? ???????
+; (1;1) -> (2;3)
+; ==================================================
+
+    MOV P2,#040H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#048H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#050H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#058H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#060H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#068H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#070H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#078H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#080H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#088H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#090H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#098H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0A0H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0A8H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0B0H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0B8H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0C0H
+    NOP
+    NOP
+    NOP
+
+; ==================================================
+; ????? 1 ??????
+; ==================================================
+
+    MOV P2,#00H
+
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+
+; ==================================================
+; ?????? ???????
+; (3;2) -> (4;3)
+; ==================================================
+
+    MOV P2,#080H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#084H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#088H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#08CH
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#090H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#094H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#098H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#09CH
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0A0H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0A4H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0A8H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0ACH
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0B0H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0B4H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0B8H
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0BCH
+    NOP
+    NOP
+    NOP
+
+    MOV P2,#0C0H
+    NOP
+    NOP
+    NOP
+
+; ==================================================
+; ????? 2 ??????
+; ==================================================
+
+    MOV P2,#00H
+
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+
+    LJMP MAIN
+
+END
+

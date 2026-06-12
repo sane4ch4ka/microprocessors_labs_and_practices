@@ -1,0 +1,23 @@
+warning; file ; line ; column ; unable to open list file "ldc_byte.rlf": No such file or directory
+warning; file ; line ; column ; unable to open list file "powerup.rlf": No such file or directory
+warning; file ; line ; column ; unable to open list file "str_cops.rlf": No such file or directory
+warning; file ; line ; column ; unable to open list file "ldc_byte.rlf": No such file or directory
+warning; file ; line ; column ; unable to open list file "powerup.rlf": No such file or directory
+warning; file ; line ; column ; unable to open list file "str_cops.rlf": No such file or directory
+
+Memory Usage Map:
+
+Program space:
+    CODE                 used   27Eh (   638) of  1000h bytes   ( 15.6%)
+
+Internal Data:
+    BITSEG               used     0h (     0) of    10h bits    (  0.0%)
+    DATA                 used    19h (    25) of    60h bytes   ( 26.0%)
+
+External Data:
+
+Summary:
+    Program space        used   27Eh (   638) of  1000h bytes   ( 15.6%)
+    Internal Data        used    19h (    25) of    80h bytes   ( 19.5%)
+    External Data        None available
+

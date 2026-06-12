@@ -1,0 +1,108 @@
+__Lrdata 39 FFFFFFCA DATA
+_lcd_data 149 0 CODE
+__Hrbss 39 0 DATA
+__Lrbss 20 0 DATA
+strx_xcopy 3 0 CODE
+?a_delay 35 0 DATA
+__Birdata 3 FFFFFFCA DATA
+__Hirdata 39 FFFFFFCA DATA
+__Lirdata 39 FFFFFFCA DATA
+powerup 58 0 CODE
+__Htext 39 0
+__Ltext 39 0
+_lcd_init 158 0 CODE
+strx_copy 19 0 CODE
+__Hcode 39 0
+__Lcode 39 0
+__Hdata 111 0 CODE
+__Hconst 100 0 CODE
+__Ldata 100 0 CODE
+__Lconst 100 0 CODE
+__Bbss 39 0 XDATA
+__Hbss 39 0 XDATA
+__Hstrings 100 0 CODE
+__Lbss 39 0 XDATA
+__Lstrings 100 0 CODE
+_delay 111 0 CODE
+str_xcopy 3 0 CODE
+__S0 2AC 0
+start1 44 0 CODE
+__Hnvram 39 0 XDATA
+small_model 1 0
+__Lnvram 39 0 XDATA
+__Hheap 39 0 XDATA
+__Lheap 39 0 XDATA
+_main 17F 0 CODE
+str_copy 19 0 CODE
+?a_main 20 0 DATA
+_exit 55 0 CODE
+start 0 0 CODE
+intlevel0 0 0
+strx_load 19 0 CODE
+__Brbit 20 20 BITSEG
+str_load 19 0 CODE
+__Hrbit 0 20 BITSEG
+intlevel1 0 0
+__Hvectors 3 0 CODE
+__Lrbit 0 20 BITSEG
+__Lvectors 0 0 CODE
+__Bidata 39 0 DATA
+__Hidata 39 0 DATA
+_lcd_cmd 13B 0 CODE
+__Lidata 39 0 DATA
+stack_internal 1 0
+__Brdata 3 FFFFFFCA DATA
+__Hrdata 39 FFFFFFCA DATA
+%segments
+vectors 0 5A CODE
+rbit 0 18 BITSEG
+data 100 2AB CODE
+%locals
+Z:\main_0.obj
+C:\labs\pr_3\ws\project1\main.c
+4 111 0 CODE
+6 113 0 CODE
+5 118 0 CODE
+6 11C 0 CODE
+7 138 0 CODE
+10 13B 0 CODE
+11 13D 0 CODE
+12 13F 0 CODE
+13 142 0 CODE
+14 144 0 CODE
+15 146 0 CODE
+18 149 0 CODE
+19 14B 0 CODE
+20 14D 0 CODE
+21 14F 0 CODE
+22 151 0 CODE
+23 153 0 CODE
+24 155 0 CODE
+27 158 0 CODE
+28 15A 0 CODE
+29 161 0 CODE
+30 166 0 CODE
+31 16B 0 CODE
+32 170 0 CODE
+33 175 0 CODE
+34 17C 0 CODE
+37 17F 0 CODE
+41 182 0 CODE
+42 191 0 CODE
+44 1A0 0 CODE
+47 1A3 0 CODE
+48 1A8 0 CODE
+49 1BD 0 CODE
+48 1C7 0 CODE
+54 1DD 0 CODE
+55 1F3 0 CODE
+57 1F8 0 CODE
+58 20D 0 CODE
+59 24D 0 CODE
+60 26A 0 CODE
+61 26C 0 CODE
+57 271 0 CODE
+64 287 0 CODE
+54 28E 0 CODE
+53 2A5 0 CODE
+67 2A8 0 CODE

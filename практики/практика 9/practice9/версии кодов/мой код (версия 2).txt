@@ -1,0 +1,54 @@
+P2 EQU 0A0H
+
+ORG 0000H
+    LJMP START
+
+ORG 0030H
+
+START:
+    MOV P2,#080H
+
+MAIN:
+
+    MOV R7,#080
+
+PAUSE0:
+    MOV P2,#080H
+    NOP
+    DJNZ R7,PAUSE0
+
+    MOV R0,#0A0H
+
+LINE1:
+    MOV P2,R0
+    NOP
+    INC R0
+    CJNE R0,#0E1H,LINE1
+
+    MOV R7,#080
+
+PAUSE1:
+    MOV P2,#080H
+    NOP
+    DJNZ R7,PAUSE1
+
+    MOV R0,#0C0H
+
+LINE2:
+    MOV P2,R0
+    NOP
+    NOP
+    INC R0
+    CJNE R0,#0E1H,LINE2
+
+    MOV R7,#160
+
+PAUSE2:
+    MOV P2,#080H
+    NOP
+    DJNZ R7,PAUSE2
+
+    LJMP MAIN
+
+END
+

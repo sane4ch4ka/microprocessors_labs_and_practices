@@ -1,0 +1,126 @@
+MAIN                                                                                                          PAGE 1
+
+                       1    $MOD51
+                       2    
+0000                   3    ORG 0000H
+0000 020100            4        LJMP MAIN
+                       5    
+0003                   6    ORG 0003H
+0003 C0E0              7        PUSH ACC
+0005 C0D0              8        PUSH PSW
+0007 B200              9        CPL 20H.0
+0009 D0D0             10        POP PSW
+000B D0E0             11        POP ACC
+000D 32               12        RETI
+                      13    
+0100                  14    ORG 0100H
+                      15    
+0100                  16    MAIN:
+                      17    
+0100 C200             18        CLR 20H.0
+                      19    
+0102 7C00             20        MOV R4, #0
+0104 7D01             21        MOV R5, #1
+                      22    
+0106 7E0A             23        MOV R6, #10      ; ???????? ???????
+                      24    
+0108 D288             25        SETB IT0
+010A D2A8             26        SETB EX0
+010C D2AF             27        SETB EA
+                      28    
+010E                  29    LOOP:
+                      30    
+010E DE15             31        DJNZ R6, SKIP_MOD
+                      32    
+0110 7E0A             33        MOV R6, #10
+                      34    
+0112 ED               35        MOV A, R5
+0113 6009             36        JZ DOWN
+                      37    
+0115                  38    UP:
+0115 0C               39        INC R4
+0116 EC               40        MOV A, R4
+0117 B4280B           41        CJNE A, #40, CONT
+011A 7D00             42        MOV R5, #0
+011C 8007             43        SJMP CONT
+                      44    
+011E                  45    DOWN:
+011E 1C               46        DEC R4
+011F EC               47        MOV A, R4
+0120 B40502           48        CJNE A, #5, CONT
+0123 7D01             49        MOV R5, #1
+                      50    
+0125                  51    CONT:
+                      52    
+0125                  53    SKIP_MOD:
+                      54    
+0125 C2B6             55        CLR P3.6
+0127 D2B6             56        SETB P3.6
+0129 C2B6             57        CLR P3.6
+                      58    
+MAIN                                                                                                          PAGE 2
+
+012B 20B7FD           59        JB P3.7, $
+                      60    
+012E E590             61        MOV A, P1
+                      62    
+0130 200002           63        JB 20H.0, MODE1
+                      64    
+0133                  65    MODE0:
+0133 8013             66        SJMP OUT
+                      67    
+0135                  68    MODE1:
+                      69    
+0135 F5F0             70        MOV B, A
+                      71    
+0137 EC               72        MOV A, R4
+                      73    
+0138 C3               74        CLR C
+0139 9414             75        SUBB A, #20
+                      76    
+013B 5007             77        JNC AMP_UP
+                      78    
+013D                  79    AMP_DOWN:
+                      80    
+013D E5F0             81        MOV A, B
+013F C3               82        CLR C
+0140 9408             83        SUBB A, #8
+0142 8004             84        SJMP OUT
+                      85    
+0144                  86    AMP_UP:
+                      87    
+0144 E5F0             88        MOV A, B
+0146 2408             89        ADD A, #8
+                      90    
+0148                  91    OUT:
+                      92    
+0148 F5A0             93        MOV P2, A
+                      94    
+014A 80C2             95        SJMP LOOP
+                      96    
+                      97    END
+                      98    
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 3
+
+ACC. . . . . . . . . . . . . . .  D ADDR  00E0H  PREDEFINED  
+AMP_DOWN . . . . . . . . . . . .  C ADDR  013DH  NOT USED  
+AMP_UP . . . . . . . . . . . . .  C ADDR  0144H  
+B. . . . . . . . . . . . . . . .  D ADDR  00F0H  PREDEFINED  
+CONT . . . . . . . . . . . . . .  C ADDR  0125H  
+DOWN . . . . . . . . . . . . . .  C ADDR  011EH  
+EA . . . . . . . . . . . . . . .  B ADDR  00AFH  PREDEFINED  
+EX0. . . . . . . . . . . . . . .  B ADDR  00A8H  PREDEFINED  
+IT0. . . . . . . . . . . . . . .  B ADDR  0088H  PREDEFINED  
+LOOP . . . . . . . . . . . . . .  C ADDR  010EH  
+MAIN . . . . . . . . . . . . . .  C ADDR  0100H  
+MODE0. . . . . . . . . . . . . .  C ADDR  0133H  NOT USED  
+MODE1. . . . . . . . . . . . . .  C ADDR  0135H  
+OUT. . . . . . . . . . . . . . .  C ADDR  0148H  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+P3 . . . . . . . . . . . . . . .  D ADDR  00B0H  PREDEFINED  
+PSW. . . . . . . . . . . . . . .  D ADDR  00D0H  PREDEFINED  
+SKIP_MOD . . . . . . . . . . . .  C ADDR  0125H  
+UP . . . . . . . . . . . . . . .  C ADDR  0115H  NOT USED  

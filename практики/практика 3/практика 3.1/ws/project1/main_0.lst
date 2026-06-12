@@ -1,0 +1,715 @@
+
+
+HI-TECH Software 8051 Macro Assembler V9.60                                Page 1
+                                                       Sat Mar 14 13:14:08 2026
+
+     1                           	psect	idata,class=DATA,space=1,limit=080h
+     2                           	psect	irdata,class=DATA,limit=080h
+     3                           	global	_delay
+     4                           	signat	_delay,4216
+     5                           	global	stack_internal
+     6                           	psect	text,class=CODE
+     7                           	psect	text
+     8                           	file	"C:\labs\pr_3\ws\project1\main.c"
+     9                           	line	4
+    10  00111                     _delay:
+    11  00111  80 26              	j	f1411
+    12  00113                     f1410:
+    13                           ;main.c: 4: void delay(unsigned int count) {
+    14                           
+    15                           ;	var   _i assigned to ?a_delay+0
+    16                           ;main.c: 5: unsigned int i;
+    17                           
+    18                           ;main.c: 6: for (i = 0; i < count; i++);
+    19                           
+    20                           	line	6
+    21  00113  E4                 	clr	a
+    22  00114  F5 35              	mov	?a_delay+0,a
+    23  00116  F5 36              	mov	?a_delay+0+1,a
+    24                           ;	var   _count assigned to ?a_delay+2
+    25                           ;_count stored from WR2
+    26                           	line	5
+    27  00118  8C 37              	mov	?a_delay+2,r4
+    28  0011A  8D 38              	mov	?a_delay+2+1,r5
+    29                           	line	6
+    30  0011C  80 08              	jmp	l6
+    31  0011E                     l3:
+    32  0011E  05 36              	inc	?a_delay+0+1
+    33  00120  E5 36              	mov	a,?a_delay+0+1
+    34  00122  70 02              	jnz	u10
+    35  00124  05 35              	inc	?a_delay+0
+    36  00126                     u10:
+    37  00126                     l6:
+    38  00126  E5 37              	mov	a,?a_delay+2
+    39  00128  B5 35  07          	cbne	a,?a_delay+0,u22
+    40  0012B  E5 38              	mov	a,?a_delay+2+1
+    41  0012D  B5 36  02          	cbne	a,?a_delay+0+1,u22
+    42  00130  80 06              	jmp	u20
+    43  00132                     u22:
+    44  00132  50 02              	bnc	u21
+    45  00134  80 02              	jmp	u20
+    46  00136                     u21:
+    47  00136  80 E6              	jmp	l3
+    48  00138                     u20:
+    49  00138                     l4:
+    50                           ;main.c: 7: }
+    51                           
+    52                           	line	7
+    53  00138                     l2:
+    54  00138  22                 	ret
+    55  00139                     f1411:
+    56  00139  80 D8              	j	f1410
+    57                           	FNSIZE	_delay,4,0
+    58                           	global	?a_delay
+    59  0000                     f1412	equ	0
+    60                           ;	param _cmd assigned to r5 on entry
+    61                           	global	_lcd_cmd
+    62                           	signat	_lcd_cmd,4216
+    63                           	line	10
+    64  0013B                     _lcd_cmd:
+    65  0013B  80 0A              	j	f1421
+    66  0013D                     f1420:
+    67                           ;main.c: 10: void lcd_cmd(unsigned char cmd) {
+    68                           
+    69                           ;main.c: 11: P0 = cmd;
+    70                           
+    71                           	line	11
+    72  0013D  8D 80              	mov	080h,r5
+    73                           ;main.c: 12: P2 = P2 & 0xF9;
+    74                           
+    75                           	line	12
+    76  0013F  53 A0 F9           	anl	0A0h,#-7
+    77                           ;main.c: 13: P2 = P2 | 0x01;
+    78                           
+    79                           	line	13
+    80  00142  D2 A0              	setb	p2.0
+    81                           ;main.c: 14: P2 = P2 & 0xFE;
+    82                           
+    83                           	line	14
+    84  00144  C2 A0              	clr	p2.0
+    85                           ;main.c: 15: }
+    86                           
+    87                           	line	15
+    88  00146                     l7:
+    89  00146  22                 	ret
+    90  00147                     f1421:
+    91  00147  80 F4              	j	f1420
+    92  0000                     f1422	equ	0
+    93                           ;	param _dat assigned to r5 on entry
+    94                           	global	_lcd_data
+    95                           	signat	_lcd_data,4216
+    96                           	line	18
+    97  00149                     _lcd_data:
+    98  00149  80 0B              	j	f1431
+    99  0014B                     f1430:
+   100                           ;main.c: 18: void lcd_data(unsigned char dat) {
+   101                           
+   102                           ;main.c: 19: P0 = dat;
+   103                           
+   104                           	line	19
+   105  0014B  8D 80              	mov	080h,r5
+   106                           ;main.c: 20: P2 = P2 | 0x02;
+   107                           
+   108                           	line	20
+   109  0014D  D2 A1              	setb	p2.1
+   110                           ;main.c: 21: P2 = P2 & 0xFB;
+   111                           
+   112                           	line	21
+   113  0014F  C2 A2              	clr	p2.2
+   114                           ;main.c: 22: P2 = P2 | 0x01;
+   115                           
+   116                           	line	22
+   117  00151  D2 A0              	setb	p2.0
+   118                           ;main.c: 23: P2 = P2 & 0xFE;
+   119                           
+   120                           	line	23
+   121  00153  C2 A0              	clr	p2.0
+   122                           ;main.c: 24: }
+   123                           
+   124                           	line	24
+   125  00155                     l8:
+   126  00155  22                 	ret
+   127  00156                     f1431:
+   128  00156  80 F3              	j	f1430
+   129  0000                     f1432	equ	0
+   130                           	global	_lcd_init
+   131                           	signat	_lcd_init,88
+   132                           	line	27
+   133  00158                     _lcd_init:
+   134  00158  80 23              	j	f1441
+   135  0015A                     f1440:
+   136                           ;main.c: 27: void lcd_init(void) {
+   137                           
+   138                           ;main.c: 28: delay(100);
+   139                           
+   140                           	FNCALL	_lcd_init,_delay
+   141                           	line	28
+   142  0015A  7C 00              	mov	r4,#high (100)
+   143  0015C  7D 64              	mov	r5,#low (100)
+   144  0015E  12 0111            	lcall	_delay
+   145                           
+   146                           ;main.c: 29: lcd_cmd(0x38);
+   147                           
+   148                           	FNCALL	_lcd_init,_lcd_cmd
+   149                           	line	29
+   150  00161  7D 38              	mov	r5,#56
+   151  00163  12 013B            	lcall	_lcd_cmd
+   152                           
+   153                           ;main.c: 30: lcd_cmd(0x0E);
+   154                           
+   155                           	line	30
+   156  00166  7D 0E              	mov	r5,#14
+   157  00168  12 013B            	lcall	_lcd_cmd
+   158                           
+   159                           ;main.c: 31: lcd_cmd(0x06);
+   160                           
+   161                           	line	31
+   162  0016B  7D 06              	mov	r5,#6
+   163  0016D  12 013B            	lcall	_lcd_cmd
+   164                           
+   165                           ;main.c: 32: lcd_cmd(0x01);
+   166                           
+   167                           	line	32
+   168  00170  7D 01              	mov	r5,#1
+   169  00172  12 013B            	lcall	_lcd_cmd
+   170                           
+   171                           ;main.c: 33: delay(50);
+   172                           
+   173                           	line	33
+   174  00175  7C 00              	mov	r4,#high (50)
+   175  00177  7D 32              	mov	r5,#low (50)
+   176  00179  12 0111            	lcall	_delay
+   177                           
+   178                           ;main.c: 34: }
+   179                           
+   180                           	line	34
+   181  0017C                     l9:
+   182  0017C  22                 	ret
+   183  0017D                     f1441:
+   184  0017D  80 DB              	j	f1440
+   185  0000                     f1442	equ	0
+   186                           	global	_main
+   187                           	signat	_main,88
+   188                           	line	37
+   189  0017F                     _main:
+   190  0017F  02 02A9            	j	f1451
+   191  00182                     f1450:
+   192                           ;main.c: 37: void main(void) {
+   193                           
+   194                           ;	var   _i assigned to ?a_main+0
+   195                           ;	var   _j assigned to ?a_main+2
+   196                           	psect	data,class=CODE
+   197                           	psect	data
+   198  00100                     F168:
+   199  00100  73                 	db	(115)
+   200  00101  61                 	db	(97)
+   201  00102  6E                 	db	(110)
+   202  00103  65                 	db	(101)
+   203  00104  63                 	db	(99)
+   204  00105  68                 	db	(104)
+   205  00106  6B                 	db	(107)
+   206  00107  61                 	db	(97)
+   207  00108  00                 	db	(0)
+   208                           ;	var   _word1 assigned to ?a_main+4
+   209                           ;main.c: 38: unsigned int i, j;
+   210                           
+   211                           ;main.c: 41: unsigned char word1[] = "sanechka";
+   212                           
+   213                           	psect	text
+   214                           	line	41
+   215  00182  78 01              	mov	r0,#high (F168)
+   216  00184  79 00              	mov	r1,#low (F168)
+   217  00186  7A 00              	mov	r2,#high (?a_main+4)
+   218  00188  7B 24              	mov	r3,#low (?a_main+4)
+   219  0018A  7D 09              	mov	r5,#low 9
+   220  0018C  7C 00              	mov	r4,#high 9
+   221                           	global	str_copy
+   222  0018E  12 0019            	lcall	str_copy
+   223                           	psect	data
+   224  00109                     F172:
+   225  00109  53                 	db	(83)
+   226  0010A  61                 	db	(97)
+   227  0010B  4E                 	db	(78)
+   228  0010C  65                 	db	(101)
+   229  0010D  34                 	db	(52)
+   230  0010E  6B                 	db	(107)
+   231  0010F  41                 	db	(65)
+   232  00110  00                 	db	(0)
+   233                           ;	var   _word2 assigned to ?a_main+13
+   234                           ;main.c: 42: unsigned char word2[] = "SaNe4kA";
+   235                           
+   236                           	psect	text
+   237                           	line	42
+   238  00191  78 01              	mov	r0,#high (F172)
+   239  00193  79 09              	mov	r1,#low (F172)
+   240  00195  7A 00              	mov	r2,#high (?a_main+13)
+   241  00197  7B 2D              	mov	r3,#low (?a_main+13)
+   242  00199  7D 08              	mov	r5,#low 8
+   243  0019B  7C 00              	mov	r4,#high 8
+   244                           	global	str_copy
+   245  0019D  12 0019            	lcall	str_copy
+   246                           ;main.c: 44: lcd_init();
+   247                           
+   248                           	FNCALL	_main,_lcd_init
+   249                           	line	44
+   250  001A0  12 0158            	lcall	_lcd_init
+   251                           ;main.c: 47: lcd_cmd(0x87);
+   252                           
+   253                           	FNCALL	_main,_lcd_cmd
+   254                           	line	47
+   255  001A3  7D 87              	mov	r5,#135
+   256  001A5  12 013B            	lcall	_lcd_cmd
+   257                           
+   258                           ;main.c: 48: for(i = 0; i < 8; i++) {
+   259                           
+   260                           	line	48
+   261  001A8  E4                 	clr	a
+   262  001A9  F5 20              	mov	?a_main+0,a
+   263  001AB  F5 21              	mov	?a_main+0+1,a
+   264  001AD  E5 21              	mov	a,?a_main+0+1
+   265  001AF  24 F8              	add	a,#low -(8)
+   266  001B1  E5 20              	mov	a,?a_main+0
+   267  001B3  34 FF              	addc	a,#high -(8)
+   268  001B5  50 02              	bnc	u31
+   269  001B7  80 02              	jmp	u30
+   270  001B9                     u31:
+   271  001B9  80 02              	jmp	l13
+   272  001BB                     u30:
+   273  001BB  80 20              	jmp	l14
+   274  001BD                     l13:
+   275                           ;main.c: 49: lcd_data(word1[i]);
+   276                           
+   277                           	FNCALL	_main,_lcd_data
+   278                           	line	49
+   279  001BD  74 24              	mov	a,#?a_main+4
+   280  001BF  25 21              	add	a,?a_main+0+1
+   281  001C1  F9                 	mov	r1,a
+   282  001C2  87 05              	mov	5+0,@r1
+   283  001C4  12 0149            	lcall	_lcd_data
+   284                           
+   285                           	line	48
+   286  001C7  05 21              	inc	?a_main+0+1
+   287  001C9  E5 21              	mov	a,?a_main+0+1
+   288+ 001CB  70 02              	jnz	u40
+   289+ 001CD  05 20              	inc	?a_main+0
+   290  001CF                     u40:
+   291  001CF  E5 21              	mov	a,?a_main+0+1
+   292  001D1  24 F8              	add	a,#low -(8)
+   293  001D3  E5 20              	mov	a,?a_main+0
+   294  001D5  34 FF              	addc	a,#high -(8)
+   295  001D7  50 02              	bnc	u51
+   296  001D9  80 02              	jmp	u50
+   297  001DB                     u51:
+   298  001DB  80 E0              	jmp	l13
+   299  001DD                     u50:
+   300  001DD                     l14:
+   301                           ;main.c: 50: }
+   302                           
+   303                           ;main.c: 53: while(1) {
+   304                           
+   305                           	line	53
+   306  001DD                     l17:
+   307                           ;main.c: 54: for(j = 0; j < 16; j++) {
+   308                           
+   309                           	line	54
+   310  001DD  E4                 	clr	a
+   311  001DE  F5 22              	mov	?a_main+2,a
+   312  001E0  F5 23              	mov	?a_main+2+1,a
+   313  001E2  E5 23              	mov	a,?a_main+2+1
+   314  001E4  24 F0              	add	a,#low -(16)
+   315  001E6  E5 22              	mov	a,?a_main+2
+   316  001E8  34 FF              	addc	a,#high -(16)
+   317  001EA  50 02              	bnc	u61
+   318  001EC  80 02              	jmp	u60
+   319  001EE                     u61:
+   320  001EE  80 03              	jmp	l19
+   321  001F0                     u60:
+   322  001F0  02 02A5            	jmp	l20
+   323  001F3                     l19:
+   324                           ;main.c: 55: lcd_cmd(0xC0);
+   325                           
+   326                           	line	55
+   327  001F3  7D C0              	mov	r5,#192
+   328  001F5  12 013B            	lcall	_lcd_cmd
+   329                           
+   330                           ;main.c: 57: for(i = 0; i < 16; i++) {
+   331                           
+   332                           	line	57
+   333  001F8  E4                 	clr	a
+   334  001F9  F5 20              	mov	?a_main+0,a
+   335  001FB  F5 21              	mov	?a_main+0+1,a
+   336  001FD  E5 21              	mov	a,?a_main+0+1
+   337  001FF  24 F0              	add	a,#low -(16)
+   338  00201  E5 20              	mov	a,?a_main+0
+   339  00203  34 FF              	addc	a,#high -(16)
+   340  00205  50 02              	bnc	u71
+   341  00207  80 02              	jmp	u70
+   342  00209                     u71:
+   343  00209  80 02              	jmp	l22
+   344  0020B                     u70:
+   345  0020B  80 7A              	jmp	l23
+   346  0020D                     l22:
+   347                           ;main.c: 58: if(i >= 15 - j && i < 15 - j + 8) {
+   348                           
+   349                           	line	58
+   350  0020D  74 0F              	mov	a,#0Fh
+   351  0020F  C3                 	clr	c
+   352  00210  95 23              	subb	a,?a_main+2+1
+   353  00212  FD                 	mov	r5,a
+   354  00213  74 00              	mov	a,#0
+   355  00215  95 22              	subb	a,?a_main+2
+   356  00217  FC                 	mov	r4,a
+   357  00218  EC                 	mov	a,r4
+   358  00219  B5 20  06          	cbne	a,?a_main+0,u82
+   359  0021C  ED                 	mov	a,r5
+   360  0021D  B5 21  02          	cbne	a,?a_main+0+1,u82
+   361  00220  80 04              	jmp	u80
+   362  00222                     u82:
+   363  00222  50 25              	bnc	u81
+   364  00224  80 00              	jmp	u80
+   365  00226                     u80:
+   366  00226  74 0F              	mov	a,#0Fh
+   367  00228  C3                 	clr	c
+   368  00229  95 23              	subb	a,?a_main+2+1
+   369  0022B  FD                 	mov	r5,a
+   370  0022C  74 00              	mov	a,#0
+   371  0022E  95 22              	subb	a,?a_main+2
+   372  00230  FC                 	mov	r4,a
+   373  00231  ED                 	mov	a,r5
+   374  00232  24 08              	add	a,#08h
+   375  00234  FD                 	mov	r5,a
+   376  00235  EC                 	mov	a,r4
+   377  00236  34 00              	addc	a,#0
+   378  00238  FC                 	mov	r4,a
+   379  00239  EC                 	mov	a,r4
+   380  0023A  B5 20  06          	cbne	a,?a_main+0,u92
+   381  0023D  ED                 	mov	a,r5
+   382  0023E  B5 21  02          	cbne	a,?a_main+0+1,u92
+   383  00241  80 06              	jmp	u91
+   384  00243                     u92:
+   385  00243  50 02              	bnc	u90
+   386  00245  80 02              	jmp	u91
+   387  00247                     u90:
+   388  00247  80 04              	jmp	u100
+   389  00249                     u81:
+   390  00249                     u91:
+   391  00249  80 00              	jmp	u101
+   392  0024B                     u101:
+   393  0024B  80 1F              	jmp	l25
+   394  0024D                     u100:
+   395                           ;main.c: 59: lcd_data(word2[i - (15 - j)]);
+   396                           
+   397                           	line	59
+   398  0024D  74 0F              	mov	a,#0Fh
+   399  0024F  C3                 	clr	c
+   400  00250  95 23              	subb	a,?a_main+2+1
+   401  00252  FD                 	mov	r5,a
+   402  00253  74 00              	mov	a,#0
+   403  00255  95 22              	subb	a,?a_main+2
+   404  00257  FC                 	mov	r4,a
+   405  00258  E5 21              	mov	a,?a_main+0+1
+   406  0025A  C3                 	clr	c
+   407  0025B  9D                 	subb	a,r5
+   408  0025C  FB                 	mov	r3,a
+   409  0025D  E5 20              	mov	a,?a_main+0
+   410  0025F  9C                 	subb	a,r4
+   411  00260  FA                 	mov	r2,a
+   412  00261  74 2D              	mov	a,#?a_main+13
+   413  00263  2B                 	add	a,r3
+   414  00264  F9                 	mov	r1,a
+   415  00265  87 05              	mov	5+0,@r1
+   416  00267  12 0149            	lcall	_lcd_data
+   417                           
+   418                           ;main.c: 60: } else {
+   419                           
+   420                           	line	60
+   421  0026A  80 05              	jmp	l26
+   422  0026C                     l25:
+   423                           ;main.c: 61: lcd_data(' ');
+   424                           
+   425                           	line	61
+   426  0026C  7D 20              	mov	r5,#32
+   427  0026E  12 0149            	lcall	_lcd_data
+   428                           
+   429                           	line	62
+   430  00271                     l26:
+   431                           	line	57
+   432  00271  05 21              	inc	?a_main+0+1
+   433  00273  E5 21              	mov	a,?a_main+0+1
+   434  00275  70 02              	jnz	u110
+   435  00277  05 20              	inc	?a_main+0
+   436  00279                     u110:
+   437  00279  E5 21              	mov	a,?a_main+0+1
+   438  0027B  24 F0              	add	a,#low -(16)
+   439  0027D  E5 20              	mov	a,?a_main+0
+   440  0027F  34 FF              	addc	a,#high -(16)
+   441  00281  50 02              	bnc	u121
+   442  00283  80 02              	jmp	u120
+   443  00285                     u121:
+   444  00285  80 86              	jmp	l22
+   445  00287                     u120:
+   446  00287                     l23:
+   447                           ;main.c: 62: }
+   448                           
+   449                           ;main.c: 63: }
+   450                           
+   451                           ;main.c: 64: delay(5);
+   452                           
+   453                           	FNCALL	_main,_delay
+   454                           	line	64
+   455  00287  7C 00              	mov	r4,#high (5)
+   456  00289  7D 05              	mov	r5,#low (5)
+   457  0028B  12 0111            	lcall	_delay
+   458                           
+   459                           	line	54
+   460  0028E  05 23              	inc	?a_main+2+1
+   461  00290  E5 23              	mov	a,?a_main+2+1
+   462  00292  70 02              	jnz	u130
+   463  00294  05 22              	inc	?a_main+2
+   464  00296                     u130:
+   465  00296  E5 23              	mov	a,?a_main+2+1
+   466  00298  24 F0              	add	a,#low -(16)
+   467  0029A  E5 22              	mov	a,?a_main+2
+   468  0029C  34 FF              	addc	a,#high -(16)
+   469  0029E  50 02              	bnc	u141
+   470  002A0  80 03              	jmp	u140
+   471  002A2                     u141:
+   472  002A2  02 01F3            	jmp	l19
+   473  002A5                     u140:
+   474  002A5                     l20:
+   475                           	line	66
+   476  002A5                     l16:
+   477                           	line	53
+   478  002A5  02 01DD            	jmp	l17
+   479  002A8                     l18:
+   480                           ;main.c: 65: }
+   481                           
+   482                           ;main.c: 66: }
+   483                           
+   484                           ;main.c: 67: }
+   485                           
+   486                           	line	67
+   487  002A8                     l12:
+   488  002A8  22                 	ret
+   489  002A9                     f1451:
+   490  002A9  02 0182            	j	f1450
+   491                           	FNSIZE	_main,21,0
+   492                           	global	?a_main
+   493  0000                     f1452	equ	0
+   494  0000                     _A10	equ	162
+   495  0000                     _A11	equ	163
+   496  0000                     _A12	equ	164
+   497  0000                     _A13	equ	165
+   498  0000                     _A14	equ	166
+   499  0000                     _A15	equ	167
+   500  0000                     _A8	equ	160
+   501  0000                     _A9	equ	161
+   502  0000                     _AC	equ	214
+   503  0000                     _ACC0	equ	224
+   504  0000                     _ACC1	equ	225
+   505  0000                     _ACC2	equ	226
+   506  0000                     _ACC3	equ	227
+   507  0000                     _ACC4	equ	228
+   508  0000                     _ACC5	equ	229
+   509  0000                     _ACC6	equ	230
+   510  0000                     _ACC7	equ	231
+   511  0000                     _AD0	equ	128
+   512  0000                     _AD1	equ	129
+   513  0000                     _AD2	equ	130
+   514  0000                     _AD3	equ	131
+   515  0000                     _AD4	equ	132
+   516  0000                     _AD5	equ	133
+   517  0000                     _AD6	equ	134
+   518  0000                     _AD7	equ	135
+   519  0000                     _B0	equ	240
+   520  0000                     _B1	equ	241
+   521  0000                     _B2	equ	242
+   522  0000                     _B3	equ	243
+   523  0000                     _B4	equ	244
+   524  0000                     _B5	equ	245
+   525  0000                     _B6	equ	246
+   526  0000                     _B7	equ	247
+   527  0000                     _CY	equ	215
+   528  0000                     _EA	equ	175
+   529  0000                     _ES	equ	172
+   530  0000                     _ET0	equ	169
+   531  0000                     _ET1	equ	171
+   532  0000                     _EX0	equ	168
+   533  0000                     _EX1	equ	170
+   534  0000                     _F0	equ	213
+   535  0000                     _IE0	equ	137
+   536  0000                     _IE1	equ	139
+   537  0000                     _INT0	equ	178
+   538  0000                     _INT1	equ	179
+   539  0000                     _IT0	equ	136
+   540  0000                     _IT1	equ	138
+   541  0000                     _OV	equ	210
+   542  0000                     _P	equ	208
+   543  0000                     _P00	equ	128
+   544  0000                     _P01	equ	129
+   545  0000                     _P02	equ	130
+   546  0000                     _P03	equ	131
+   547  0000                     _P04	equ	132
+   548  0000                     _P05	equ	133
+   549  0000                     _P06	equ	134
+   550  0000                     _P07	equ	135
+   551  0000                     _P10	equ	144
+   552  0000                     _P11	equ	145
+   553  0000                     _P12	equ	146
+   554  0000                     _P13	equ	147
+   555+ 0000                     _P14	equ	148
+   556  0000                     _P15	equ	149
+   557  0000                     _P16	equ	150
+   558  0000                     _P17	equ	151
+   559  0000                     _P20	equ	160
+   560  0000                     _P21	equ	161
+   561  0000                     _P22	equ	162
+   562  0000                     _P23	equ	163
+   563  0000                     _P24	equ	164
+   564  0000                     _P25	equ	165
+   565  0000                     _P26	equ	166
+   566  0000                     _P27	equ	167
+   567  0000                     _P30	equ	176
+   568  0000                     _P31	equ	177
+   569  0000                     _P32	equ	178
+   570  0000                     _P33	equ	179
+   571  0000                     _P34	equ	180
+   572  0000                     _P35	equ	181
+   573  0000                     _P36	equ	182
+   574  0000                     _P37	equ	183
+   575  0000                     _PS	equ	188
+   576  0000                     _PT0	equ	185
+   577  0000                     _PT1	equ	187
+   578  0000                     _PX0	equ	184
+   579  0000                     _PX1	equ	186
+   580  0000                     _RB8	equ	154
+   581  0000                     _RD	equ	183
+   582  0000                     _REN	equ	156
+   583  0000                     _RI	equ	152
+   584  0000                     _RS0	equ	211
+   585  0000                     _RS1	equ	212
+   586  0000                     _RXD	equ	176
+   587  0000                     _SM0	equ	159
+   588  0000                     _SM1	equ	158
+   589  0000                     _SM2	equ	157
+   590  0000                     _T0	equ	180
+   591  0000                     _T1	equ	181
+   592  0000                     _TB8	equ	155
+   593  0000                     _TF0	equ	141
+   594  0000                     _TF1	equ	143
+   595  0000                     _TI	equ	153
+   596  0000                     _TR0	equ	140
+   597  0000                     _TR1	equ	142
+   598  0000                     _TXD	equ	177
+   599  0000                     _WR	equ	182
+   600  0000                     _ACC	equ	224
+   601  0000                     _B	equ	240
+   602  0000                     _DPH	equ	131
+   603  0000                     _DPL	equ	130
+   604  0000                     _IE	equ	168
+   605  0000                     _IP	equ	184
+   606  0000                     _P0	equ	128
+   607  0000                     _P1	equ	144
+   608  0000                     _P2	equ	160
+   609  0000                     _P3	equ	176
+   610  0000                     _PCON	equ	135
+   611  0000                     _PSW	equ	208
+   612  0000                     _SBUF	equ	153
+   613  0000                     _SCON	equ	152
+   614  0000                     _SP	equ	129
+   615  0000                     _TCON	equ	136
+   616  0000                     _TH0	equ	140
+   617  0000                     _TH1	equ	141
+   618  0000                     _TL0	equ	138
+   619  0000                     _TL1	equ	139
+   620  0000                     _TMOD	equ	137
+   621  0000                     _ACC_BITS	equ	224
+   622  0000                     _B_BITS	equ	240
+   623  0000                     _IE_BITS	equ	168
+   624  0000                     _IP_BITS	equ	184
+   625  0000                     _P0_BITS	equ	128
+   626  0000                     _P1_BITS	equ	144
+   627  0000                     _P2_BITS	equ	160
+   628  0000                     _P3_BITS	equ	176
+   629  0000                     _PCON_BITS	equ	135
+   630  0000                     _PSW_BITS	equ	208
+   631  0000                     _SCON_BITS	equ	152
+   632  0000                     _TCON_BITS	equ	136
+   633  0000                     _TMOD_BITS	equ	137
+
+
+HI-TECH Software 8051 Macro Assembler V9.60                                Page 2
+Symbol Table                                           Sat Mar 14 13:14:08 2026
+
+       ?a_main 00020              _B 000F0              l2 00138  
+            l3 0011E              l4 00138              _P 000D0  
+            l6 00126              l7 00146              l8 00155  
+            l9 0017C        ?a_delay 00035             _B0 000F0  
+           _B1 000F1             _B2 000F2             _B3 000F3  
+           _B4 000F4             _B5 000F5             _B6 000F6  
+           _A8 000A0             _B7 000F7             _A9 000A1  
+           _F0 000D5             _AC 000D6             l12 002A8  
+           l20 002A5             l13 001BD             l22 0020D  
+           l14 001DD             _EA 000AF             l23 00287  
+           l16 002A5             l25 0026C             l17 001DD  
+           l18 002A8             l26 00271             l19 001F3  
+           _P0 00080             _P1 00090             _P2 000A0  
+           _P3 000B0             _IE 000A8             _T0 000B4  
+           _T1 000B5             _ES 000AC             _CY 000D7  
+           _IP 000B8             _RD 000B7             u10 00126  
+           u20 00138             _RI 00098             u21 00136  
+           u30 001BB             u22 00132             u31 001B9  
+           u40 001CF             _TI 00099             u50 001DD  
+           _PS 000BC             u51 001DB             _OV 000D2  
+           u60 001F0             u61 001EE             _SP 00081  
+           u70 0020B             u71 00209             u80 00226  
+           u81 00249             u90 00247             u82 00222  
+           u91 00249             u92 00243             _WR 000B6  
+     _lcd_data 00149       _lcd_init 00158         _B_BITS 000F0  
+          F172 00109            F168 00100            _A10 000A2  
+          _A11 000A3            _A12 000A4            _A13 000A5  
+          _A14 000A6            _A15 000A7            _AD0 00080  
+          _AD1 00081            _AD2 00082            _AD3 00083  
+          _AD4 00084            _AD5 00085            _AD6 00086  
+          _AD7 00087            _ACC 000E0            _P00 00080  
+          _P01 00081            _P10 00090            _P02 00082  
+          _P11 00091            _P03 00083            _P20 000A0  
+          _P12 00092            _P04 00084            _P21 000A1  
+          _P13 00093            _P05 00085            _P30 000B0  
+          _P22 000A2            _P14 00094            _P06 00086  
+          _P31 000B1            _P23 000A3            _P15 00095  
+          _P07 00087            _P32 000B2            _P24 000A4  
+          _P16 00096            _P33 000B3            _P25 000A5  
+          _P17 00097            _P34 000B4            _P26 000A6  
+          _P35 000B5            _P27 000A7            _P36 000B6  
+          _P37 000B7            _IE0 00089            _IE1 0008B  
+          _ET0 000A9            _ET1 000AB            _EX0 000A8  
+          _EX1 000AA            _DPH 00083            _DPL 00082  
+          _IT0 00088            _IT1 0008A            _RB8 0009A  
+          u100 0024D            u101 0024B            u110 00279  
+          u120 00287            u121 00285            u130 00296  
+          _TF0 0008D            _TB8 0009B            u140 002A5  
+          _TF1 0008F            u141 002A2            _TH0 0008C  
+          _TH1 0008D            _SM0 0009F            _SM1 0009E  
+          _TL0 0008A            _SM2 0009D            _PT0 000B9  
+          _TL1 0008B            _PT1 000BB            _RS0 000D3  
+          _RS1 000D4            _REN 0009C            _PX0 000B8  
+          _PX1 000BA            _TR0 0008C            _TR1 0008E  
+          _RXD 000B0            _PSW 000D0            _TXD 000B1  
+      _P0_BITS 00080        _P1_BITS 00090        _P2_BITS 000A0  
+      _P3_BITS 000B0        _IE_BITS 000A8       _ACC_BITS 000E0  
+      _IP_BITS 000B8           f1410 00113           f1411 00139  
+         f1420 0013D           f1412 00000           f1421 00147  
+         f1430 0014B           f1422 00000           f1431 00156  
+         f1440 0015A           f1432 00000           f1441 0017D  
+         f1450 00182           f1442 00000           f1451 002A9  
+         f1452 00000           _ACC0 000E0           _ACC1 000E1  
+         _ACC2 000E2           _ACC3 000E3           _ACC4 000E4  
+         _ACC5 000E5           _ACC6 000E6           _ACC7 000E7  
+stack_internal 00001           _INT0 000B2           _INT1 000B3  
+         _PCON 00087           _SCON 00098           _SBUF 00099  
+         _TCON 00088           _TMOD 00089           _main 0017F  
+     _PSW_BITS 000D0        _lcd_cmd 0013B          _delay 00111  
+    _PCON_BITS 00087      _SCON_BITS 00098      _TCON_BITS 00088  
+      str_copy 00019      _TMOD_BITS 00089  
+

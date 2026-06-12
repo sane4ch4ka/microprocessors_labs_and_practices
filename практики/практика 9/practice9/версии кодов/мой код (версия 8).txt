@@ -1,0 +1,69 @@
+P2 EQU 0A0H
+
+ORG 0000H
+    LJMP START
+
+ORG 0030H
+
+START:
+    MOV P2,#00H
+    LCALL DELAY_750US
+
+MAIN:
+    MOV P2,#40H
+
+    MOV R0,#40H
+LINE1:
+    MOV P2,R0
+    NOP
+    INC R0
+    CJNE R0,#0C1H,LINE1
+
+    MOV P2,#0FFH
+    LCALL DELAY_750US
+
+    MOV P2,#0FFH
+
+    MOV P2,#80H
+
+    MOV R0,#80H
+LINE2:
+    MOV P2,R0
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    NOP
+    INC R0
+    CJNE R0,#0C1H,LINE2
+
+    MOV P2,#00H
+    LCALL DELAY_1500US
+
+    SJMP MAIN
+
+DELAY_750US:
+    MOV R7,#0BEH
+WAIT:
+    NOP
+    NOP
+    DJNZ R7,WAIT
+    RET
+
+DELAY_1500US:
+    MOV R7,#0BEH
+WAITP1:
+    NOP
+    NOP
+    DJNZ R7,WAITP1
+    MOV R7,#0BEH
+WAITP2:
+    NOP
+    NOP
+    DJNZ R7,WAITP2
+    RET
+
+END
+

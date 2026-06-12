@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\high school\\3 course\\2 semestre\\\u0430\u0441\u0432\u0442\\\u041B\u0420\\\u041B\u04203\\lab1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D304EAA3-BE04-4BB0-B1F8-90A677F8F05D}|lab1.vcxproj|D:\\high school\\3 course\\2 semestre\\\u0430\u0441\u0432\u0442\\\u041B\u0420\\\u041B\u04203\\lab1\\Source.asm||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{D304EAA3-BE04-4BB0-B1F8-90A677F8F05D}|lab1.vcxproj|solutionrelative:Source.asm||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 221,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Source.asm",
+              "DocumentMoniker": "D:\\high school\\3 course\\2 semestre\\\u0430\u0441\u0432\u0442\\\u041B\u0420\\\u041B\u04203\\lab1\\Source.asm",
+              "RelativeDocumentMoniker": "Source.asm",
+              "ToolTip": "D:\\high school\\3 course\\2 semestre\\\u0430\u0441\u0432\u0442\\\u041B\u0420\\\u041B\u04203\\lab1\\Source.asm",
+              "RelativeToolTip": "Source.asm",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAUwGYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-15T10:59:20.385Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+MAIN                                                                                                          PAGE 1
+
+                       1    $MOD51
+0000                   2    ORG 00H
+                       3    
+0000 758780            4    MOV PCON,#80H
+0003 759840            5    MOV SCON,#40H
+0006 758920            6    MOV TMOD,#20H
+0009 758DFD            7    MOV TH1,#0FDH
+000C D28E              8    SETB TR1
+                       9    
+000E 7850             10    MOV R0,#50H
+                      11    
+0010 760D             12    MOV @R0,#13
+0012 08               13    INC R0
+0013 760A             14    MOV @R0,#10
+0015 08               15    INC R0
+                      16    
+0016 7641             17    MOV @R0,#65
+0018 08               18    INC R0
+0019 7642             19    MOV @R0,#66
+001B 08               20    INC R0
+001C 7643             21    MOV @R0,#67
+001E 08               22    INC R0
+001F 7644             23    MOV @R0,#68
+0021 08               24    INC R0
+0022 7645             25    MOV @R0,#69
+0024 08               26    INC R0
+0025 7646             27    MOV @R0,#70
+0027 08               28    INC R0
+0028 7647             29    MOV @R0,#71
+002A 08               30    INC R0
+002B 7648             31    MOV @R0,#72
+002D 08               32    INC R0
+002E 7649             33    MOV @R0,#73
+0030 08               34    INC R0
+0031 764A             35    MOV @R0,#74
+0033 08               36    INC R0
+0034 764B             37    MOV @R0,#75
+                      38    
+0036 08               39    INC R0
+0037 760D             40    MOV @R0,#13
+0039 08               41    INC R0
+003A 760A             42    MOV @R0,#10
+                      43    
+003C 7850             44    MOV R0,#50H
+003E 7A0F             45    MOV R2,#15
+                      46    
+0040                  47    LOOP:
+0040 E6               48    MOV A,@R0
+0041 F599             49    MOV SBUF,A
+0043                  50    BUSY:
+0043 3099FD           51    JNB TI,BUSY
+0046 C299             52    CLR TI
+0048 08               53    INC R0
+0049 DAF5             54    DJNZ R2,LOOP
+                      55    
+004B                  56    STOP:
+004B 80FE             57    SJMP STOP
+                      58    
+MAIN                                                                                                          PAGE 2
+
+                      59    END
+                      60    
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 3
+
+BUSY . . . . . . . . . . . . . .  C ADDR  0043H  
+LOOP . . . . . . . . . . . . . .  C ADDR  0040H  
+PCON . . . . . . . . . . . . . .  D ADDR  0087H  PREDEFINED  
+SBUF . . . . . . . . . . . . . .  D ADDR  0099H  PREDEFINED  
+SCON . . . . . . . . . . . . . .  D ADDR  0098H  PREDEFINED  
+STOP . . . . . . . . . . . . . .  C ADDR  004BH  
+TH1. . . . . . . . . . . . . . .  D ADDR  008DH  PREDEFINED  
+TI . . . . . . . . . . . . . . .  B ADDR  0099H  PREDEFINED  
+TMOD . . . . . . . . . . . . . .  D ADDR  0089H  PREDEFINED  
+TR1. . . . . . . . . . . . . . .  B ADDR  008EH  PREDEFINED  

@@ -1,0 +1,9 @@
+﻿  Assembling Source.asm...
+Source.asm(1): error A2008: syntax error : .
+Source.asm(2): error A2008: syntax error : .
+Source.asm(3): error A2008: syntax error : .
+Source.asm(101): error A2008: syntax error : in instruction
+Source.asm(104): error A2008: syntax error : w
+Source.asm(123): error A2008: syntax error : Start
+Source.asm(123): error A2088: END directive required at end of file
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: выход из команды "ml64.exe /c /nologo /Zi /Fo"lab1\x64\Debug\Source.obj" /W3 /errorReport:prompt  /TaSource.asm" с кодом "1".

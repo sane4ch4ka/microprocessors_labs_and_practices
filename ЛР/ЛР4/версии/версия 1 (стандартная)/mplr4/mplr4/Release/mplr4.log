@@ -1,0 +1,9 @@
+﻿  Assembling asm_module.asm...
+  c_functions.cpp
+  main.cpp
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+  All 15 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+asm_module.obj : error LNK2026: небезопасный модуль для образа SAFESEH.
+C:\Users\xane4chka\source\repos\mplr4\Release\mplr4.exe : fatal error LNK1281: Не удается создать образ SAFESEH.

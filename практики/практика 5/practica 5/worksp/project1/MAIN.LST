@@ -1,0 +1,376 @@
+MAIN                                                                                                          PAGE 1
+
+                       1    $MOD51
+                       2    
+0000                   3            ORG     00H
+0000 020100            4            LJMP    START
+                       5    
+0100                   6            ORG     100H
+0100                   7    START:
+0100 7580FF            8            MOV     P0, #0FFH
+0103 7590FF            9            MOV     P1, #0FFH
+0106 75A000           10            MOV     P2, #00H
+0109 75B0FF           11            MOV     P3, #0FFH
+                      12    
+010C 758901           13            MOV     TMOD, #01H
+                      14            
+010F 758038           15            MOV     P0, #038H
+0112 75A001           16            MOV     P2, #1
+0115 75A000           17            MOV     P2, #0
+0118 7D02             18            MOV     R5, #2
+011A 120194           19            LCALL   DELAY_MS
+                      20            
+011D 75800C           21            MOV     P0, #00CH
+0120 75A001           22            MOV     P2, #1
+0123 75A000           23            MOV     P2, #0
+0126 7D01             24            MOV     R5, #1
+0128 120194           25            LCALL   DELAY_MS
+                      26            
+012B 758001           27            MOV     P0, #001H
+012E 75A001           28            MOV     P2, #1
+0131 75A000           29            MOV     P2, #0
+0134 7D02             30            MOV     R5, #2
+0136 120194           31            LCALL   DELAY_MS
+                      32            
+0139 758080           33            MOV     P0, #080H
+013C 75A001           34            MOV     P2, #1
+013F 75A000           35            MOV     P2, #0
+0142 7D01             36            MOV     R5, #1
+0144 120194           37            LCALL   DELAY_MS
+                      38    
+0147                  39    MAIN:
+0147 1201A8           40            LCALL   GET_KEY_DEBOUNCE
+014A B4FF02           41            CJNE    A, #0FFH, SHOW
+014D 80F8             42            SJMP    MAIN
+                      43    
+014F                  44    SHOW:
+014F 758001           45            MOV     P0, #001H
+0152 75A001           46            MOV     P2, #1
+0155 75A000           47            MOV     P2, #0
+0158 7D01             48            MOV     R5, #1
+015A 120194           49            LCALL   DELAY_MS
+                      50            
+015D 758080           51            MOV     P0, #080H
+0160 75A001           52            MOV     P2, #1
+0163 75A000           53            MOV     P2, #0
+                      54            
+0166 75F00A           55            MOV     B, #10
+0169 84               56            DIV     AB
+                      57            
+016A B40004           58            CJNE    A, #0, SHOW_TENS
+MAIN                                                                                                          PAGE 2
+
+016D 7420             59            MOV     A, #20H
+016F 8002             60            SJMP    SHOW_UNITS
+0171                  61    SHOW_TENS:
+0171 2430             62            ADD     A, #30H
+0173                  63    SHOW_UNITS:
+0173 F580             64            MOV     P0, A
+0175 75A003           65            MOV     P2, #3
+0178 75A002           66            MOV     P2, #2
+                      67            
+017B E5F0             68            MOV     A, B
+017D 2430             69            ADD     A, #30H
+017F F580             70            MOV     P0, A
+0181 75A003           71            MOV     P2, #3
+0184 75A002           72            MOV     P2, #2
+                      73            
+0187                  74    WAIT_RELEASE:
+0187 1201A8           75            LCALL   GET_KEY_DEBOUNCE
+018A B4FFFA           76            CJNE    A, #0FFH, WAIT_RELEASE
+                      77            
+018D 7D02             78            MOV     R5, #2
+018F 120194           79            LCALL   DELAY_MS
+                      80            
+0192 80B3             81            SJMP    MAIN
+                      82    
+0194                  83    DELAY_MS:
+0194                  84    DELAY_LOOP:
+0194 758CEC           85            MOV     TH0, #0ECH 
+0197 758A78           86            MOV     TL0, #078H
+019A C28D             87            CLR     TF0
+019C D28C             88            SETB    TR0
+                      89            
+019E                  90    WAIT_TICK:
+019E 308DFD           91            JNB     TF0, WAIT_TICK
+01A1 C28C             92            CLR     TR0
+01A3 C28D             93            CLR     TF0
+                      94            
+01A5 DDED             95            DJNZ    R5, DELAY_LOOP
+01A7 22               96            RET
+                      97    
+01A8                  98    GET_KEY_DEBOUNCE:
+01A8 1201C0           99            LCALL   GET_KEY_ACTUAL
+01AB F9              100            MOV     R1, A
+01AC B4FF01          101            CJNE    A, #0FFH, DEBOUNCE_CHECK
+01AF 22              102            RET
+                     103            
+01B0                 104    DEBOUNCE_CHECK:
+01B0 7D01            105            MOV     R5, #1
+01B2 120194          106            LCALL   DELAY_MS
+01B5 1201C0          107            LCALL   GET_KEY_ACTUAL
+01B8 FA              108            MOV     R2, A
+01B9 E9              109            MOV     A, R1
+01BA C3              110            CLR     C
+01BB 9A              111            SUBB    A, R2
+01BC 70EA            112            JNZ     GET_KEY_DEBOUNCE
+01BE E9              113            MOV     A, R1
+01BF 22              114            RET
+                     115    
+01C0                 116    GET_KEY_ACTUAL:
+MAIN                                                                                                          PAGE 3
+
+01C0 7590FF          117            MOV     P1, #0FFH
+01C3 75B0FF          118            MOV     P3, #0FFH
+01C6 7D01            119            MOV     R5, #1
+01C8 120194          120            LCALL   DELAY_MS
+                     121    
+01CB 75B0FE          122            MOV     P3, #0FEH
+01CE 7D01            123            MOV     R5, #1
+01D0 120194          124            LCALL   DELAY_MS
+01D3 E590            125            MOV     A, P1
+01D5 541F            126            ANL     A, #1FH
+01D7 B41F03          127            CJNE    A, #1FH, GO_FOUND0
+01DA 0201E0          128            LJMP    SCAN_COL1
+01DD                 129    GO_FOUND0:
+01DD 020234          130            LJMP    FOUND0
+                     131            
+01E0                 132    SCAN_COL1:
+01E0 75B0FD          133            MOV     P3, #0FDH
+01E3 7D01            134            MOV     R5, #1
+01E5 120194          135            LCALL   DELAY_MS
+01E8 E590            136            MOV     A, P1
+01EA 541F            137            ANL     A, #1FH
+01EC B41F03          138            CJNE    A, #1FH, GO_FOUND1
+01EF 0201F5          139            LJMP    SCAN_COL2
+01F2                 140    GO_FOUND1:
+01F2 020255          141            LJMP    FOUND1
+                     142            
+01F5                 143    SCAN_COL2:
+01F5 75B0FB          144            MOV     P3, #0FBH
+01F8 7D01            145            MOV     R5, #1
+01FA 120194          146            LCALL   DELAY_MS
+01FD E590            147            MOV     A, P1
+01FF 541F            148            ANL     A, #1FH
+0201 B41F03          149            CJNE    A, #1FH, GO_FOUND2
+0204 02020A          150            LJMP    SCAN_COL3
+0207                 151    GO_FOUND2:
+0207 020276          152            LJMP    FOUND2
+                     153            
+020A                 154    SCAN_COL3:
+020A 75B0F7          155            MOV     P3, #0F7H
+020D 7D01            156            MOV     R5, #1
+020F 120194          157            LCALL   DELAY_MS
+0212 E590            158            MOV     A, P1
+0214 541F            159            ANL     A, #1FH
+0216 B41F03          160            CJNE    A, #1FH, GO_FOUND3
+0219 02021F          161            LJMP    SCAN_COL4
+021C                 162    GO_FOUND3:
+021C 020297          163            LJMP    FOUND3
+                     164            
+021F                 165    SCAN_COL4:
+021F 75B0EF          166            MOV     P3, #0EFH
+0222 7D01            167            MOV     R5, #1
+0224 120194          168            LCALL   DELAY_MS
+0227 E590            169            MOV     A, P1
+0229 541F            170            ANL     A, #1FH
+022B B41F03          171            CJNE    A, #1FH, GO_FOUND4
+022E 74FF            172            MOV     A, #0FFH
+0230 22              173            RET
+0231                 174    GO_FOUND4:
+MAIN                                                                                                          PAGE 4
+
+0231 0202B8          175            LJMP    FOUND4
+                     176    
+0234                 177    FOUND0:
+0234 B41E03          178            CJNE    A, #1EH, NOT_KEY1
+0237 7401            179            MOV     A, #01H
+0239 22              180            RET
+023A                 181    NOT_KEY1:
+023A B41D03          182            CJNE    A, #1DH, NOT_KEY2
+023D 7402            183            MOV     A, #02H
+023F 22              184            RET
+0240                 185    NOT_KEY2:
+0240 B41B03          186            CJNE    A, #1BH, NOT_KEY3
+0243 7403            187            MOV     A, #03H
+0245 22              188            RET
+0246                 189    NOT_KEY3:
+0246 B41703          190            CJNE    A, #17H, NOT_KEY4
+0249 7404            191            MOV     A, #04H
+024B 22              192            RET
+024C                 193    NOT_KEY4:
+024C B40F03          194            CJNE    A, #0FH, NOT_FOUND0
+024F 7405            195            MOV     A, #05H
+0251 22              196            RET
+0252                 197    NOT_FOUND0:
+0252 74FF            198            MOV     A, #0FFH
+0254 22              199            RET
+                     200    
+0255                 201    FOUND1:
+0255 B41E03          202            CJNE    A, #1EH, NOT_KEY6
+0258 7406            203            MOV     A, #06H
+025A 22              204            RET
+025B                 205    NOT_KEY6:
+025B B41D03          206            CJNE    A, #1DH, NOT_KEY7
+025E 7407            207            MOV     A, #07H
+0260 22              208            RET
+0261                 209    NOT_KEY7:
+0261 B41B03          210            CJNE    A, #1BH, NOT_KEY8
+0264 7408            211            MOV     A, #08H
+0266 22              212            RET
+0267                 213    NOT_KEY8:
+0267 B41703          214            CJNE    A, #17H, NOT_KEY9
+026A 7409            215            MOV     A, #09H
+026C 22              216            RET
+026D                 217    NOT_KEY9:
+026D B40F03          218            CJNE    A, #0FH, NOT_FOUND1
+0270 740A            219            MOV     A, #0AH
+0272 22              220            RET
+0273                 221    NOT_FOUND1:
+0273 74FF            222            MOV     A, #0FFH
+0275 22              223            RET
+                     224    
+0276                 225    FOUND2:
+0276 B41E03          226            CJNE    A, #1EH, NOT_KEY11
+0279 740B            227            MOV     A, #0BH
+027B 22              228            RET
+027C                 229    NOT_KEY11:
+027C B41D03          230            CJNE    A, #1DH, NOT_KEY12
+027F 740C            231            MOV     A, #0CH
+0281 22              232            RET
+MAIN                                                                                                          PAGE 5
+
+0282                 233    NOT_KEY12:
+0282 B41B03          234            CJNE    A, #1BH, NOT_KEY13
+0285 740D            235            MOV     A, #0DH
+0287 22              236            RET
+0288                 237    NOT_KEY13:
+0288 B41703          238            CJNE    A, #17H, NOT_KEY14
+028B 740E            239            MOV     A, #0EH
+028D 22              240            RET
+028E                 241    NOT_KEY14:
+028E B40F03          242            CJNE    A, #0FH, NOT_FOUND2
+0291 740F            243            MOV     A, #0FH
+0293 22              244            RET
+0294                 245    NOT_FOUND2:
+0294 74FF            246            MOV     A, #0FFH
+0296 22              247            RET
+                     248    
+0297                 249    FOUND3:
+0297 B41E03          250            CJNE    A, #1EH, NOT_KEY16
+029A 7410            251            MOV     A, #10H
+029C 22              252            RET
+029D                 253    NOT_KEY16:
+029D B41D03          254            CJNE    A, #1DH, NOT_KEY17
+02A0 7411            255            MOV     A, #11H
+02A2 22              256            RET
+02A3                 257    NOT_KEY17:
+02A3 B41B03          258            CJNE    A, #1BH, NOT_KEY18
+02A6 7412            259            MOV     A, #12H
+02A8 22              260            RET
+02A9                 261    NOT_KEY18:
+02A9 B41703          262            CJNE    A, #17H, NOT_KEY19
+02AC 7413            263            MOV     A, #13H
+02AE 22              264            RET
+02AF                 265    NOT_KEY19:
+02AF B40F03          266            CJNE    A, #0FH, NOT_FOUND3
+02B2 7414            267            MOV     A, #14H
+02B4 22              268            RET
+02B5                 269    NOT_FOUND3:
+02B5 74FF            270            MOV     A, #0FFH
+02B7 22              271            RET
+                     272    
+02B8                 273    FOUND4:
+02B8 B41E03          274            CJNE    A, #1EH, NOT_KEY21
+02BB 7415            275            MOV     A, #15H
+02BD 22              276            RET
+02BE                 277    NOT_KEY21:
+02BE B41D03          278            CJNE    A, #1DH, NOT_KEY22
+02C1 7416            279            MOV     A, #16H
+02C3 22              280            RET
+02C4                 281    NOT_KEY22:
+02C4 B41B03          282            CJNE    A, #1BH, NOT_KEY23
+02C7 7417            283            MOV     A, #17H
+02C9 22              284            RET
+02CA                 285    NOT_KEY23:
+02CA B41703          286            CJNE    A, #17H, NOT_KEY24
+02CD 7418            287            MOV     A, #18H
+02CF 22              288            RET
+02D0                 289    NOT_KEY24:
+02D0 B40F03          290            CJNE    A, #0FH, NOT_FOUND4
+MAIN                                                                                                          PAGE 6
+
+02D3 7419            291            MOV     A, #19H
+02D5 22              292            RET
+02D6                 293    NOT_FOUND4:
+02D6 74FF            294            MOV     A, #0FFH
+02D8 22              295            RET
+                     296    
+                     297            END
+
+VERSION 1.2k ASSEMBLY COMPLETE, 0 ERRORS FOUND
+MAIN                                                                                                          PAGE 7
+
+B. . . . . . . . . . . . . . . .  D ADDR  00F0H  PREDEFINED  
+DEBOUNCE_CHECK . . . . . . . . .  C ADDR  01B0H  
+DELAY_LOOP . . . . . . . . . . .  C ADDR  0194H  
+DELAY_MS . . . . . . . . . . . .  C ADDR  0194H  
+FOUND0 . . . . . . . . . . . . .  C ADDR  0234H  
+FOUND1 . . . . . . . . . . . . .  C ADDR  0255H  
+FOUND2 . . . . . . . . . . . . .  C ADDR  0276H  
+FOUND3 . . . . . . . . . . . . .  C ADDR  0297H  
+FOUND4 . . . . . . . . . . . . .  C ADDR  02B8H  
+GET_KEY_ACTUAL . . . . . . . . .  C ADDR  01C0H  
+GET_KEY_DEBOUNCE . . . . . . . .  C ADDR  01A8H  
+GO_FOUND0. . . . . . . . . . . .  C ADDR  01DDH  
+GO_FOUND1. . . . . . . . . . . .  C ADDR  01F2H  
+GO_FOUND2. . . . . . . . . . . .  C ADDR  0207H  
+GO_FOUND3. . . . . . . . . . . .  C ADDR  021CH  
+GO_FOUND4. . . . . . . . . . . .  C ADDR  0231H  
+MAIN . . . . . . . . . . . . . .  C ADDR  0147H  
+NOT_FOUND0 . . . . . . . . . . .  C ADDR  0252H  
+NOT_FOUND1 . . . . . . . . . . .  C ADDR  0273H  
+NOT_FOUND2 . . . . . . . . . . .  C ADDR  0294H  
+NOT_FOUND3 . . . . . . . . . . .  C ADDR  02B5H  
+NOT_FOUND4 . . . . . . . . . . .  C ADDR  02D6H  
+NOT_KEY1 . . . . . . . . . . . .  C ADDR  023AH  
+NOT_KEY11. . . . . . . . . . . .  C ADDR  027CH  
+NOT_KEY12. . . . . . . . . . . .  C ADDR  0282H  
+NOT_KEY13. . . . . . . . . . . .  C ADDR  0288H  
+NOT_KEY14. . . . . . . . . . . .  C ADDR  028EH  
+NOT_KEY16. . . . . . . . . . . .  C ADDR  029DH  
+NOT_KEY17. . . . . . . . . . . .  C ADDR  02A3H  
+NOT_KEY18. . . . . . . . . . . .  C ADDR  02A9H  
+NOT_KEY19. . . . . . . . . . . .  C ADDR  02AFH  
+NOT_KEY2 . . . . . . . . . . . .  C ADDR  0240H  
+NOT_KEY21. . . . . . . . . . . .  C ADDR  02BEH  
+NOT_KEY22. . . . . . . . . . . .  C ADDR  02C4H  
+NOT_KEY23. . . . . . . . . . . .  C ADDR  02CAH  
+NOT_KEY24. . . . . . . . . . . .  C ADDR  02D0H  
+NOT_KEY3 . . . . . . . . . . . .  C ADDR  0246H  
+NOT_KEY4 . . . . . . . . . . . .  C ADDR  024CH  
+NOT_KEY6 . . . . . . . . . . . .  C ADDR  025BH  
+NOT_KEY7 . . . . . . . . . . . .  C ADDR  0261H  
+NOT_KEY8 . . . . . . . . . . . .  C ADDR  0267H  
+NOT_KEY9 . . . . . . . . . . . .  C ADDR  026DH  
+P0 . . . . . . . . . . . . . . .  D ADDR  0080H  PREDEFINED  
+P1 . . . . . . . . . . . . . . .  D ADDR  0090H  PREDEFINED  
+P2 . . . . . . . . . . . . . . .  D ADDR  00A0H  PREDEFINED  
+P3 . . . . . . . . . . . . . . .  D ADDR  00B0H  PREDEFINED  
+SCAN_COL1. . . . . . . . . . . .  C ADDR  01E0H  
+SCAN_COL2. . . . . . . . . . . .  C ADDR  01F5H  
+SCAN_COL3. . . . . . . . . . . .  C ADDR  020AH  
+SCAN_COL4. . . . . . . . . . . .  C ADDR  021FH  
+SHOW . . . . . . . . . . . . . .  C ADDR  014FH  
+SHOW_TENS. . . . . . . . . . . .  C ADDR  0171H  
+SHOW_UNITS . . . . . . . . . . .  C ADDR  0173H  
+START. . . . . . . . . . . . . .  C ADDR  0100H  
+TF0. . . . . . . . . . . . . . .  B ADDR  008DH  PREDEFINED  
+TH0. . . . . . . . . . . . . . .  D ADDR  008CH  PREDEFINED  
+TL0. . . . . . . . . . . . . . .  D ADDR  008AH  PREDEFINED  
+TMOD . . . . . . . . . . . . . .  D ADDR  0089H  PREDEFINED  
+MAIN                                                                                                          PAGE 8
+
+TR0. . . . . . . . . . . . . . .  B ADDR  008CH  PREDEFINED  
+WAIT_RELEASE . . . . . . . . . .  C ADDR  0187H  
+WAIT_TICK. . . . . . . . . . . .  C ADDR  019EH  
